@@ -34,12 +34,12 @@ public class ProductController {
     List<CatalogItem> getItems(@PathVariable("userId") Long userId){
 
 
-        UserRating ratings = restTemplate.getForObject("http://localhost:8082/rating/user/"+userId,UserRating.class);
+        UserRating ratings = restTemplate.getForObject("http://rating-service/rating/user/"+userId,UserRating.class);
         return ratings.getRatings().stream().map(rating -> {
 //            Product p = restTemplate.getForObject("http://localhost:8081/product/info/"+rating.getItemId(), Product.class);
             Product p = builder.build()
                     .get()
-                    .uri("http://localhost:8081/product/info/"+rating.getItemId())
+                    .uri("http://product-info-service/product/info/"+rating.getItemId())
                     .retrieve()
                     .bodyToMono(Product.class)
                     .block();
