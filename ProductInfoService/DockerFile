@@ -1,0 +1,4 @@
+FROM openjdk:8
+COPY target/product-info-service-1.0.jar prduct-info-service
+CMD java -jar prduct-info-service
+EXPOSE 9098
